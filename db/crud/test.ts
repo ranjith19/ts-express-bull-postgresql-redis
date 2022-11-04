@@ -3,12 +3,11 @@ import { datasource } from "../data-source";
 import { TestModel } from "../entity/TestModel";
 
 export class TestModelRepository {
-    
     private logger: APILogger;
     private db: any = datasource.manager;
 
     constructor(){
-        
+        this.logger = new APILogger();
     }
 
     async insert(){

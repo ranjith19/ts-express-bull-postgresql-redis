@@ -1,5 +1,6 @@
 import { TestModelRepository } from "../db/crud/test";
 import * as express from "express";
+import { sendJsonResponse } from "./utils";
 
 
 export class TestRoute {
@@ -21,7 +22,7 @@ export const setupTestRoutes = (app: express.Application) => {
 
     app.get("/api/test/", (req, res) => {
         route.create().then(item => {
-            res.send(JSON.stringify(item))
+            sendJsonResponse(res, item);
         })
     })
 }

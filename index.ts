@@ -1,10 +1,10 @@
 import * as http from "http";
 import App from "./app";
 import { APILogger } from "./logger/api.logger";
-import { AppDataSource } from "./db/data-source";
+import { datasource } from "./db/data-source";
 const port = process.env.PORT || 3070;
 
-AppDataSource.initialize()
+datasource.initialize()
     .then(() => {
         console.log("Data Source has been initialized!")
     })
@@ -19,7 +19,6 @@ const logger = new APILogger();
 
 server.on("listening", function (): void {
     const addr = server.address();
-    const bind = (typeof addr === "string") ? `pipe ${addr}` : `port ${addr.port}`;
     logger.info(`Listening on http://localhost:${port}`, null);
 });
 
