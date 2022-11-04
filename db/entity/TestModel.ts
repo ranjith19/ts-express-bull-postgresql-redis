@@ -2,7 +2,7 @@ import { BeforeInsert, Column, Entity, PrimaryColumn } from "typeorm";
 import { genXid } from "./genId";
 
 @Entity()
-export class User {
+export class TestModel {
 
     @PrimaryColumn("varchar", {
         length: 20
@@ -13,14 +13,5 @@ export class User {
     setId() {
         this.id = genXid();
     }
-
-    @Column()
-    firstName: string
-
-    @Column()
-    lastName: string
-
-    @Column()
-    age: number
 
 }

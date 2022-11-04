@@ -8,7 +8,7 @@
     "dev": "./node_modules/nodemon/bin/nodemon.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typeorm": "typeorm-ts-node-commonjs",
-    "db:generate": "typeorm-ts-node-commonjs  migration:generate -d db/data-source.ts db/migration/migration",
+    "db:generate": "typeorm-ts-node-commonjs  migration:generate -d db/data-source.ts",
     "db:upgrade": "typeorm-ts-node-commonjs migration:run -d db/data-source.ts",
     "db:downgrade": "typeorm-ts-node-commonjs migration:revert -d db/data-source.ts"
   },

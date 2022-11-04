@@ -1,7 +1,7 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { User } from "./entity/User"
-import { migration1667562210734 } from "./migration/1667562210734-migration";
+import { TestModel } from "./entity/TestModel";
+import { test1667564451453 } from "./migration/1667564451453-test";
 
 const hostName = process.env.DBHOST;
 const userName = process.env.DBUSER;
@@ -9,7 +9,7 @@ const password = process.env.DBPASSWORD;
 const database = process.env.DBNAME;
 const port = process.env.DBPORT;
 
-export const AppDataSource = new DataSource({
+export const datasource = new DataSource({
     type: "postgres",
     host:hostName,
     port: parseInt(port),
@@ -18,7 +18,7 @@ export const AppDataSource = new DataSource({
     database: database,
     synchronize: false,
     logging: false,
-    entities: [User],
-    migrations: [migration1667562210734],
+    entities: [TestModel],
+    migrations: [test1667564451453],
     subscribers: [],
 })
