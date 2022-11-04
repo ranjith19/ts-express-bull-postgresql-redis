@@ -1,16 +1,8 @@
 import * as http from "http";
 import App from "./app";
 import { APILogger } from "./logger/api.logger";
-import { datasource } from "./db/data-source";
 const port = process.env.PORT || 3070;
 
-datasource.initialize()
-    .then(() => {
-        console.log("Data Source has been initialized!")
-    })
-    .catch((err) => {
-        console.error("Error during Data Source initialization", err)
-})
 App.set("port", port);
 const server = http.createServer(App);
 server.listen(port);

@@ -14,7 +14,13 @@ prodapi:
 	source env.sh && npm run start
 
 devapi:
-	source env.sh && npm run dev	
+	source env.sh && npm run dev
+
+prodworker:
+	source env.sh && npm run worker
+
+devworker:
+	source env.sh && npm run devworker
 
 db.connect: ## connect to postgres
 	source env.sh && docker-compose exec postgres psql -U ${DBUSER} --db ${DBNAME}
