@@ -6,6 +6,7 @@ import * as swaggerUi from 'swagger-ui-express';
 import { setupRoutes } from "./api/routes";
 import { datasource } from "./db/data-source";
 import { Logger } from "./logger/api.logger";
+var expressPino = require('express-pino-logger')
 
 
 datasource.initialize()
@@ -41,6 +42,7 @@ class App {
     }
 
     private routes(): void {
+        this.express.use(expressPino);
         setupRoutes(this.express);
 
         this.express.get("/", (req, res, next) => {

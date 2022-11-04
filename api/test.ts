@@ -3,6 +3,7 @@ import * as express from "express";
 import { sendJsonResponse } from "./utils";
 import { sendAsyncTask } from "../async/send";
 import { TaskData } from "../async/taskData";
+import { Logger } from "pino";
 
 
 class TestRoute {
@@ -17,7 +18,7 @@ class TestRoute {
         return await this.repo.insert();
     }
 
-    async asyncTest() {
+    async asyncTest(logger: Logger) {
         return await sendAsyncTask(new TaskData("Hello", ['hi']))
     }
 
@@ -34,7 +35,7 @@ testRouter.get("/api/test/", (req, res) => {
 })
 
 testRouter.get("/api/async/", (req, res) => {
-    route.asyncTest().then(job => {
+    route.asyncTest(req.log).then(job => {
         sendJsonResponse(res, job);
     })
 })
