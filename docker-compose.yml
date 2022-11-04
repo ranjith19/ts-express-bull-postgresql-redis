@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  redis:
+    image: redis
+    ports:
+      - 5001:6379
+
+  postgres:
+    image: postgres:12
+    restart: always
+    command: postgres -c 'max_connections=200'
+    environment:
+      POSTGRES_USER: ${DBUSER}
+      POSTGRES_PASSWORD: ${DBPASSWORD}
+      POSTGRES_DB: ${DBNAME}
+    ports:
+      - '${DBPORT}:5432'
+    volumes:
+      - bridge-db:/var/lib/postgresql/data:cached
+
+volumes:
+  bridge-db:
