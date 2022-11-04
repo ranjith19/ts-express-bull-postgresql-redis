@@ -1,10 +1,9 @@
 import { DefaultQueue } from "./async/queues";
-import { APILogger } from "./logger/api.logger";
+import { Logger } from "./logger/api.logger";
 
-const logger = new APILogger()
 
 DefaultQueue.process(async (job)=>{
-    logger.info("received", job.data);
+    Logger.info({msg: "Received job", job: job});
 })
 
-console.log("Queue", DefaultQueue.name, "initialised");
+Logger.info({msg: "Queue inited", queue: DefaultQueue.name, ts: new Date()});

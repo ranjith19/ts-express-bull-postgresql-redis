@@ -1,19 +1,17 @@
-import { APILogger } from "../../logger/api.logger";
+import { Logger } from "../../logger/api.logger";
 import { datasource } from "../data-source";
 import { TestModel } from "../entity/TestModel";
 
 export class TestModelRepository {
-    private logger: APILogger;
     private db: any = datasource.manager;
 
     constructor(){
-        this.logger = new APILogger();
     }
 
     async insert(){
         const item = new TestModel();
         await this.db.save(item)
-        this.logger.info("Saved", item);
+        Logger.info({"msg": "Saved", "item": item});
         return item;
     }
 }

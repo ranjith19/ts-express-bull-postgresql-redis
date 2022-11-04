@@ -1,15 +1,14 @@
 import { DefaultQueue } from "./queues";
 import { TaskData } from "./taskData";
+import { Logger } from "../logger/api.logger"; 
 
-import { APILogger } from "../logger/api.logger";
 
-const logger = new APILogger();
 
 
 export const sendAsyncTask =  async (taskData: TaskData) => {
     taskData.sentAt = new Date();
-    logger.info("Sending task", taskData);
+    Logger.info({msg:"Sending task", taskData});
     const job = await DefaultQueue.add(taskData);
-    logger.info("Job sent", job)
+    Logger.info({msg: "Job sent", job})
     return job;
 }

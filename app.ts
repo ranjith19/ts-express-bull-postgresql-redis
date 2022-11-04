@@ -5,20 +5,20 @@ import "reflect-metadata";
 import * as swaggerUi from 'swagger-ui-express';
 import { setupRoutes } from "./api/routes";
 import { datasource } from "./db/data-source";
-import { APILogger } from "./logger/api.logger";
+import { Logger } from "./logger/api.logger";
+
 
 datasource.initialize()
     .then(() => {
-        console.log("Data Source has been initialized!")
+        Logger.info("Data Source has been initialized!")
     })
     .catch((err) => {
-        console.error("Error during Data Source initialization:", err)
+        Logger.error({ msg: "Error during Data Source initialization:", err })
     })
 
 class App {
 
     public express: express.Application;
-    public logger: APILogger;
 
     /* Swagger files start */
     private swaggerFile: any = (process.cwd() + "/swagger/swagger.json");
@@ -32,7 +32,6 @@ class App {
         this.express = express();
         this.middleware();
         this.routes();
-        this.logger = new APILogger();
     }
 
     // Configure Express middleware.
