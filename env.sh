@@ -5,7 +5,11 @@ export DBDIALECT=postgres
 export DBPASSWORD=mordor
 export DBPORT=5002
 
-export BROKER_URL=redis://localhost:5001/0
+export BROKER_PORT=5001
+export BROKER_HOST=localhost
+
+
+export BROKER_URL=redis://${BROKER_HOST}:${BROKER_PORT}/0
 
 export PORT=3081
 
