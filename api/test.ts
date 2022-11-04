@@ -5,7 +5,7 @@ import { sendAsyncTask } from "../async/send";
 import { TaskData } from "../async/taskData";
 
 
-export class TestRoute {
+class TestRoute {
 
     private repo: TestModelRepository;
 
@@ -23,18 +23,18 @@ export class TestRoute {
 
 }
 
-export const setupTestRoutes = (app: express.Application) => {
-    const route = new TestRoute();
+const route = new TestRoute();
 
-    app.get("/api/test/", (req, res) => {
-        route.create().then(item => {
-            sendJsonResponse(res, item);
-        })
-    })
+export const testRouter = express.Router();
 
-    app.get("/api/async/", (req, res) => {
-        route.asyncTest().then(job => {
-            sendJsonResponse(res, job);
-        })
+testRouter.get("/api/test/", (req, res) => {
+    route.create().then(item => {
+        sendJsonResponse(res, item);
     })
-}
+})
+
+testRouter.get("/api/async/", (req, res) => {
+    route.asyncTest().then(job => {
+        sendJsonResponse(res, job);
+    })
+})

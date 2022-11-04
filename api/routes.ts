@@ -1,6 +1,6 @@
 import * as express from "express";
-import { setupTestRoutes } from "./test";
+import { testRouter } from "./test";
 
 export const setupRoutes = (app: express.Application) => {
-    setupTestRoutes(app);
+    app.use(testRouter)
 }
