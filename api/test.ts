@@ -19,6 +19,7 @@ class TestRoute {
     }
 
     async asyncTest(logger: Logger) {
+        console.log("logger is", logger)
         return await sendAsyncTask(new TaskData("Hello", ['hi']))
     }
 
@@ -35,6 +36,7 @@ testRouter.get("/api/test/", (req, res) => {
 })
 
 testRouter.get("/api/async/", (req, res) => {
+    req.log.info({ msg: "Starting async" });
     route.asyncTest(req.log).then(job => {
         sendJsonResponse(res, job);
     })

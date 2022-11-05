@@ -6,8 +6,7 @@ import * as swaggerUi from 'swagger-ui-express';
 import { setupRoutes } from "./api/routes";
 import { datasource } from "./db/data-source";
 import { Logger } from "./logger/api.logger";
-var expressPino = require('express-pino-logger')
-
+import * as ExpressPino from "express-pino-logger";
 
 datasource.initialize()
     .then(() => {
@@ -39,10 +38,23 @@ class App {
     private middleware(): void {
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({ extended: false }));
+
+        this.express.use(ExpressPino({
+            serializers: {
+                req: (req) => ({
+                    method: req.method,
+                    url: req.url,
+                }),
+                res: (res) =>({
+                    statusCode: res.statusCode
+                })
+            },
+        }
+        ));
     }
 
     private routes(): void {
-        this.express.use(expressPino);
+
         setupRoutes(this.express);
 
         this.express.get("/", (req, res, next) => {
@@ -52,7 +64,7 @@ class App {
 
         // swagger docs
         this.express.use('/api/docs', swaggerUi.serve,
-            swaggerUi.setup(this.swaggerDocument, null, null, this.customCss));
+            swaggerUi.setup(this.swaggerDocument, undefined, undefined, this.customCss));
 
         // handle undefined routes
         this.express.use("*", (req, res, next) => {
