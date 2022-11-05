@@ -1,14 +1,14 @@
+import { Logger } from "pino";
 import { DefaultQueue } from "./queues";
 import { TaskData } from "./taskData";
-import { Logger } from "../logger/api.logger"; 
 
 
 
 
-export const sendAsyncTask =  async (taskData: TaskData) => {
+export const sendAsyncTask =  async (log: Logger, taskData: TaskData) => {
     taskData.sentAt = new Date();
-    Logger.info({msg:"Sending task", taskData});
+    log.info({msg:"Sending task", taskData});
     const job = await DefaultQueue.add(taskData);
-    Logger.info({msg: "Job sent", job})
+    log.info({msg: "Job sent", job})
     return job;
 }

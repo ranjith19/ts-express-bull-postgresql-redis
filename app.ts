@@ -5,15 +5,26 @@ import "reflect-metadata";
 import * as swaggerUi from 'swagger-ui-express';
 import { setupRoutes } from "./src/api/routes";
 import { datasource } from "./src/db/data-source";
-import { Logger } from "./src/logger/api.logger";
+import { getLogger } from "./src/logger/api.logger";
 import * as ExpressPino from "express-pino-logger";
+import { Logger } from "pino";
+import { requestID } from "./src/logger/requestId";
+
+declare module 'express-serve-static-core' {
+  interface Request {
+    log?: Logger,
+    requestId?: string
+  }
+}
+
+const logger = getLogger("app-logger")
 
 datasource.initialize()
     .then(() => {
-        Logger.info("Data Source has been initialized!")
+        logger.info("Data Source has been initialized!")
     })
     .catch((err) => {
-        Logger.error({ msg: "Error during Data Source initialization:", err })
+        logger.error({ msg: "Error during Data Source initialization:", err })
     })
 
 class App {
@@ -38,12 +49,15 @@ class App {
     private middleware(): void {
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({ extended: false }));
+        this.express.use(requestID());
+
 
         this.express.use(ExpressPino({
             serializers: {
                 req: (req) => ({
                     method: req.method,
                     url: req.url,
+                    traceId: req.raw.requestId
                 }),
                 res: (res) =>({
                     statusCode: res.statusCode

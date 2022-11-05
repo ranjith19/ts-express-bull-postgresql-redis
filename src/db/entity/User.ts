@@ -1,5 +1,5 @@
 import { BeforeInsert, Column, Entity, PrimaryColumn } from "typeorm";
-import { genXid } from "./genId";
+import { genXid } from "../../utils/genId";
 
 @Entity()
 export class User {

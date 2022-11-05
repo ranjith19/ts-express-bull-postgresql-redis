@@ -3,10 +3,6 @@
         "target": "es6",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "moduleResolution": "Node",
-        "typeRoots": [
-            "src/custom-types"
-        ]
-    },
-    "files": ["src/custom-types/index.d.ts"]
+        "moduleResolution": "Node"
+    }
 }

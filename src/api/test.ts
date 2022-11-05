@@ -14,13 +14,12 @@ class TestRoute {
         this.repo = new TestModelRepository();
     }
 
-    async create() {
-        return await this.repo.insert();
+    async create(log: Logger) {
+        return await this.repo.insert(log);
     }
 
-    async asyncTest(logger: Logger) {
-        console.log("logger is", logger)
-        return await sendAsyncTask(new TaskData("Hello", ['hi']))
+    async asyncTest(log: Logger) {
+        return await sendAsyncTask(log, new TaskData("Hello", ['hi']))
     }
 
 }
@@ -30,7 +29,7 @@ const route = new TestRoute();
 export const testRouter = express.Router();
 
 testRouter.get("/api/test/", (req, res) => {
-    route.create().then(item => {
+    route.create(req.log).then(item => {
         sendJsonResponse(res, item);
     })
 })
