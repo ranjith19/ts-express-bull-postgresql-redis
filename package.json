@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-restapi-mongo-ts",
+  "name": "sample-ts-api",
   "version": "1.0.0",
-  "description": "Example Project on how to build and develop REST API with NodeJS and MongoDB",
+  "description": "Example project",
   "main": "index.js",
   "scripts": {
     "api": "ts-node api.ts",
@@ -10,21 +10,13 @@
     "devworker": "./node_modules/nodemon/bin/nodemon.js --config worker-nodemon.json | pino-pretty",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typeorm": "typeorm-ts-node-commonjs",
-    "db:generate": "typeorm-ts-node-commonjs  migration:generate -d db/data-source.ts",
-    "db:upgrade": "typeorm-ts-node-commonjs migration:run -d db/data-source.ts",
-    "db:downgrade": "typeorm-ts-node-commonjs migration:revert -d db/data-source.ts"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bbachi/nodejs-restapi-mongo-ts.git"
+    "db:generate": "typeorm-ts-node-commonjs  migration:generate -d src/db/data-source.ts",
+    "db:upgrade": "typeorm-ts-node-commonjs migration:run -d src/db/data-source.ts",
+    "db:downgrade": "typeorm-ts-node-commonjs migration:revert -d src/db/data-source.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bbachi/nodejs-restapi-mongo-ts/issues"
-  },
-  "homepage": "https://github.com/bbachi/nodejs-restapi-mongo-ts#readme",
   "dependencies": {
     "bull": "^4.10.1",
     "express": "^4.18.2",
