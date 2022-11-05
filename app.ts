@@ -3,9 +3,9 @@ import * as express from "express";
 import * as fs from 'fs';
 import "reflect-metadata";
 import * as swaggerUi from 'swagger-ui-express';
-import { setupRoutes } from "./api/routes";
-import { datasource } from "./db/data-source";
-import { Logger } from "./logger/api.logger";
+import { setupRoutes } from "./src/api/routes";
+import { datasource } from "./src/db/data-source";
+import { Logger } from "./src/logger/api.logger";
 import * as ExpressPino from "express-pino-logger";
 
 datasource.initialize()
@@ -21,9 +21,9 @@ class App {
     public express: express.Application;
 
     /* Swagger files start */
-    private swaggerFile: any = (process.cwd() + "/swagger/swagger.json");
+    private swaggerFile: any = (process.cwd() + "/src/swagger/swagger.json");
     private swaggerData: any = fs.readFileSync(this.swaggerFile, 'utf8');
-    private customCss: any = fs.readFileSync((process.cwd() + "/swagger/swagger.css"), 'utf8');
+    private customCss: any = fs.readFileSync((process.cwd() + "/src/swagger/swagger.css"), 'utf8');
     private swaggerDocument = JSON.parse(this.swaggerData);
     /* Swagger files end */
 

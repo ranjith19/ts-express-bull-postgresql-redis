@@ -1,6 +1,6 @@
 import * as http from "http";
 import App from "./app";
-import { Logger } from "./logger/api.logger";
+import { Logger } from "./src/logger/api.logger";
 const port = process.env.PORT || 3070;
 
 App.set("port", port);

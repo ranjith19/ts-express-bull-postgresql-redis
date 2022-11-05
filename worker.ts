@@ -1,5 +1,5 @@
-import { DefaultQueue } from "./async/queues";
-import { Logger } from "./logger/api.logger";
+import { DefaultQueue } from "./src/async/queues";
+import { Logger } from "./src/logger/api.logger";
 
 
 DefaultQueue.process(async (job)=>{

@@ -5,8 +5,8 @@
         "emitDecoratorMetadata": true,
         "moduleResolution": "Node",
         "typeRoots": [
-            "custom-types"
+            "src/custom-types"
         ]
     },
-    "files": ["custom-types/index.d.ts"]
+    "files": ["src/custom-types/index.d.ts"]
 }
