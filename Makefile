@@ -26,7 +26,7 @@ db.connect: ## connect to postgres
 	source env.sh && docker-compose exec postgres psql -U ${DBUSER} --db ${DBNAME}
 
 migration.create:
-	source env.sh && npm run db:generate db/migration/$(NAME)
+	source env.sh && npm run db:generate src/db/migration/$(NAME)
 
 migration.upgrade:
 	source env.sh && npm run db:upgrade
