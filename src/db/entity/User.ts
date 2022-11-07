@@ -1,18 +1,11 @@
-import { BeforeInsert, Column, Entity, PrimaryColumn } from "typeorm";
+import {  Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { genXid } from "../../utils/genId";
 
 @Entity()
 export class User {
 
-    @PrimaryColumn("varchar", {
-        length: 20
-    })
+    @PrimaryGeneratedColumn("uuid" )
     id: string
-
-    @BeforeInsert()
-    setId() {
-        this.id = genXid();
-    }
 
     @Column()
     firstName: string
